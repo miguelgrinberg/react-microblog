@@ -68,3 +68,13 @@
   margin-top: 15px;
   margin-bottom: 15px;
 }
+
+.Write {
+  margin-bottom: 10px;
+  padding: 30px 0px 40px 0px;
+  border-bottom: 1px solid #eee;
+}
+
+.Write form {
+  width: 100%;
+}
