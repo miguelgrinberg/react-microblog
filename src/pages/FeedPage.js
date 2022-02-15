@@ -4,7 +4,7 @@ import Posts from '../components/Posts';
 export default function FeedPage() {
   return (
     <Body sidebar>
-      <Posts />
+      <Posts write={true} />
     </Body>
   );
 }
