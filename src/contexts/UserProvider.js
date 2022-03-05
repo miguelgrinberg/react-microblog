@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { useApi } from './ApiProvider';
 
 const UserContext = createContext();
@@ -19,19 +19,19 @@ export default function UserProvider({ children }) {
     })();
   }, [api]);
 
-  const login = async (username, password) => {
+  const login = useCallback(async (username, password) => {
     const result = await api.login(username, password);
     if (result === 'ok') {
       const response = await api.get('/me');
       setUser(response.ok ? response.body : null);
     }
     return result;
-  };
+  }, [api]);
 
-  const logout = async () => {
+  const logout = useCallback(async () => {
     await api.logout();
     setUser(null);
-  };
+  }, [api]);
 
   return (
     <UserContext.Provider value={{ user, setUser, login, logout }}>
