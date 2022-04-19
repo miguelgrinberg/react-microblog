@@ -18,6 +18,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "deploy": "npm run build && docker-compose build && docker-compose up -d",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
