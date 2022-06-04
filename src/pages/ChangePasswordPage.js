@@ -7,7 +7,7 @@ import InputField from '../components/InputField';
 import { useApi } from '../contexts/ApiProvider';
 import { useFlash } from '../contexts/FlashProvider';
 
-export default function EditUserPage() {
+export default function ChangePasswordPage() {
   const [formErrors, setFormErrors] = useState({});
   const oldPasswordField = useRef();
   const passwordField = useRef();
