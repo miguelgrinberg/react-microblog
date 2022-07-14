@@ -3,10 +3,11 @@ import { BrowserRouter } from 'react-router-dom';
 import Post from './Post';
 
 test('it renders all the components of the post', () => {
+  const postDateUTC = '2022-01-01T00:00:00.000Z';
   const post = {
     text: 'hello',
     author: {username: 'susan', avatar_url: 'https://example.com/avatar/susan'},
-    timestamp: '2022-01-01T00:00:00.000Z',
+    timestamp: postDateUTC,
   };
 
   render(
@@ -27,5 +28,5 @@ test('it renders all the components of the post', () => {
   expect(avatar).toHaveAttribute('src', 'https://example.com/avatar/susan&s=48');
   expect(timestamp).toBeInTheDocument();
   expect(timestamp).toHaveAttribute(
-    'title', 'Sat Jan 01 2022 00:00:00 GMT+0000 (Greenwich Mean Time)');
-});
+    'title', new Date(postDateUTC).toString());
+}); 
