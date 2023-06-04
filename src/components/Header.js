@@ -28,7 +28,7 @@ export default function Header() {
                       Profile
                     </NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item as={NavLink} to="/password">
+                    <NavDropdown.Item as={NavLink} to="/password" disabled={!user.has_password}>
                       Change Password
                     </NavDropdown.Item>
                     <NavDropdown.Item onClick={logout}>

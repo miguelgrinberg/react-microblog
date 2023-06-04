@@ -13,6 +13,8 @@ import EditUserPage from './pages/EditUserPage';
 import ChangePasswordPage from './pages/ChangePasswordPage';
 import LoginPage from './pages/LoginPage';
 import RegistrationPage from './pages/RegistrationPage';
+import SocialLoginPage from './pages/SocialLoginPage';
+import SocialCallbackPage from './pages/SocialCallbackPage';
 import ResetRequestPage from './pages/ResetRequestPage';
 import ResetPage from './pages/ResetPage';
 
@@ -30,6 +32,12 @@ export default function App() {
                 } />
                 <Route path="/register" element={
                   <PublicRoute><RegistrationPage /></PublicRoute>
+                } />
+                <Route path="/oauth2/:provider" element={
+                  <PublicRoute><SocialLoginPage /></PublicRoute>
+                } />
+                <Route path="/oauth2/:provider/callback" element={
+                  <PublicRoute><SocialCallbackPage /></PublicRoute>
                 } />
                 <Route path="/reset-request" element={
                   <PublicRoute><ResetRequestPage /></PublicRoute>

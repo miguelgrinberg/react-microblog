@@ -53,6 +53,7 @@ export default function LoginPage() {
   return (
     <Body>
       <h1>Login</h1>
+      <p>No patience to type? Login with <Link to="/oauth2/google">Google</Link> or with <Link to="/oauth2/github">GitHub</Link>.</p>
       <Form onSubmit={onSubmit}>
         <InputField
           name="username" label="Username or email address"

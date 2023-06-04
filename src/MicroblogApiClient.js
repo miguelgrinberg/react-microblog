@@ -38,7 +38,7 @@ export default class MicroblogApiClient {
           'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
           ...options.headers,
         },
-        credentials: options.url === '/tokens' ? 'include' : 'omit',
+        credentials: options.url.startsWith('/tokens') ? 'include' : 'omit',
         body: options.body ? JSON.stringify(options.body) : null,
       });
     }
@@ -83,6 +83,18 @@ export default class MicroblogApiClient {
         Authorization:  'Basic ' + btoa(username + ":" + password)
       }
     });
+    if (!response.ok) {
+      return response.status === 401 ? 'fail' : 'error';
+    }
+    localStorage.setItem('accessToken', response.body.access_token);
+    return 'ok';
+  }
+
+  async oauth2Login(provider, code, state) {
+    const response = await this.post('/tokens/oauth2/' + provider, {
+      code,
+      state,
+    }, {});
     if (!response.ok) {
       return response.status === 401 ? 'fail' : 'error';
     }

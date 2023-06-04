@@ -28,13 +28,22 @@ export default function UserProvider({ children }) {
     return result;
   }, [api]);
 
+  const oauth2Login = useCallback(async (provider, code, state) => {
+    const result = await api.oauth2Login(provider, code, state);
+    if (result === 'ok') {
+      const response = await api.get('/me');
+      setUser(response.ok ? response.body : null);
+    }
+    return result;
+  }, [api]);
+
   const logout = useCallback(async () => {
     await api.logout();
     setUser(null);
   }, [api]);
 
   return (
-    <UserContext.Provider value={{ user, setUser, login, logout }}>
+    <UserContext.Provider value={{ user, setUser, login, oauth2Login, logout }}>
       {children}
     </UserContext.Provider>
   );
