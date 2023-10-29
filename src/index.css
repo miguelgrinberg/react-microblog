@@ -35,6 +35,59 @@
   background-color: #def;
 }
 
+.FlashMessage {
+  background-color: rgba(0, 0, 0, 0);
+  z-index: 950;
+  border-left: 0px !important;
+  margin: 80px 10px 10px 10px;
+  pointer-events: none;
+}
+
+@keyframes SlideIn {
+  0% {
+    left: 380px;
+    opacity: 0;
+  }
+  100% {
+    left: 0px;
+    opacity: 1;
+  }
+}
+
+@keyframes SlideOut {
+  0% {
+    left: 0px;
+    opacity: 1;
+    max-height: 200px;
+  }
+  75% {
+    left: 380px;
+    opacity: 0;
+    max-height: 200px;
+  }
+  100% {
+    left: 380px;
+    opacity: 0;
+    max-height: 0px;
+  }
+}
+
+.FlashMessageAlert {
+  position: relative;
+  animation: SlideIn 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.FlashMessageAlert .alert {
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.1);
+  pointer-events: auto;
+}
+
+.FlashMessageAlert.closed {
+  animation: SlideOut 0.75s;
+  animation-fill-mode: forwards;
+}
+
 .Content {
   margin-top: 10px;
 }

@@ -15,12 +15,14 @@ import LoginPage from './pages/LoginPage';
 import RegistrationPage from './pages/RegistrationPage';
 import ResetRequestPage from './pages/ResetRequestPage';
 import ResetPage from './pages/ResetPage';
+import FlashMessage from './components/FlashMessage';
 
 export default function App() {
   return (
     <Container fluid className="App">
       <BrowserRouter>
         <FlashProvider>
+          <FlashMessage />
           <ApiProvider>
             <UserProvider>
               <Header />

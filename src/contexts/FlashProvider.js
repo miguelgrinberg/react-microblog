@@ -1,30 +1,34 @@
 import { createContext, useContext, useState, useCallback } from 'react';
 
 export const FlashContext = createContext();
-let flashTimer;
+let flashId = 0;
 
 export default function FlashProvider({ children }) {
-  const [flashMessage, setFlashMessage] = useState({});
-  const [visible, setVisible] = useState(false);
+  const [flashMessages, setFlashMessages] = useState([]);
 
-  const hideFlash = useCallback(() => {
-    setVisible(false);
+  const hideMessage = useCallback(id => {
+    const deleteMessage = id => {
+      setFlashMessages(messages => {
+        return messages.filter(message => message.id !== id);
+      });
+    };
+
+    setFlashMessages(messages => {
+      return messages.map(message => (message.id === id) ? {...message, visible: false} : message);
+    });
+    setTimeout(deleteMessage.bind(null, id), 2000);
   }, []);
 
   const flash = useCallback((message, type, duration = 10) => {
-    if (flashTimer) {
-      clearTimeout(flashTimer);
-      flashTimer = undefined;
-    }
-    setFlashMessage({message, type});
-    setVisible(true);
+    const id = ++flashId;
+    setFlashMessages(messages => [...messages, {id, message, type, visible: true}]);
     if (duration) {
-      flashTimer = setTimeout(hideFlash, duration * 1000);
+      setTimeout(hideMessage.bind(null, id), duration * 1000);
     }
-  }, [hideFlash]);
+  }, [hideMessage]);
 
   return (
-    <FlashContext.Provider value={{flash, hideFlash, flashMessage, visible}}>
+    <FlashContext.Provider value={{flash, flashMessages, hideMessage}}>
       {children}
     </FlashContext.Provider>
   );

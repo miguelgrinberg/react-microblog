@@ -9,7 +9,7 @@ export default function Body({ sidebar, children }) {
       <Stack direction="horizontal" className="Body">
         {sidebar && <Sidebar />}
         <Container className="Content">
-          <FlashMessage />
+          {/* <FlashMessage /> */}
           {children}
         </Container>
       </Stack>
